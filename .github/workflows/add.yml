@@ -1,0 +1,38 @@
+name: add
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: 'The full path in Drive. e.g. xxxx/aaa.txt'
+        required: true
+        type: string
+      url:
+        description: 'The source public url.'
+        required: true
+        type: string
+        default: ''
+      save:
+        description: 'Save source into github release'
+        required: true
+        type: boolean
+        default: true
+jobs:
+  if_workflow_dispatch:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - name: Run Script
+        run: node .github/scripts/add.js '${{ github.event.inputs.path }}' '${{ github.event.inputs.url }}'
+      - name: Git Commit
+        run: |
+          git config --global user.name 'Action'
+          git config --global user.email 'action@github.com'
+          git add *
+          git commit -m 'add ${{ github.event.inputs.path }}'
+          git push origin main

@@ -39,14 +39,23 @@ function ajaxGet(url) {
 }
 
 window.onload = function() {
-    ajaxGet('drive.json').onreadystatechange = function() {
-        if(this.readyState === 4 && this.status === 200) {
-            drive = JSON.parse(this.responseText);
-            [path, drive] = findPath(path, drive);
-            loadHeader(path);
-            loadMain(drive);
+    loadPage();
+}
+
+function loadPage() {
+    setTimeout(() => {
+        ajaxGet('drive.json?' + new Date().getTime()).onreadystatechange = function() {
+            if(this.readyState === 4 && this.status === 200) {
+                if(JSON.stringify(drive) != this.responseText) {
+                    drive = JSON.parse(this.responseText);
+                    [path, drive] = findPath(path, drive);
+                    loadHeader(path);
+                    loadMain(drive);
+                }
+            }
         }
-    }
+        loadPage();
+    }, 1000);
 }
 
 function loadHeader(path) {

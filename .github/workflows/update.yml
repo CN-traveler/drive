@@ -1,4 +1,4 @@
-name: add_file
+name: update
 on:
   workflow_dispatch:
     inputs:
@@ -10,6 +10,7 @@ on:
         description: 'The source public url.'
         required: true
         type: string
+        default: ''
       save:
         description: 'Save source into github release'
         required: true
@@ -27,11 +28,13 @@ jobs:
         with:
           node-version: '14'
       - name: Run Script
-        run: node .github/scripts/add_file.js '${{ github.event.inputs.path }}' '${{ github.event.inputs.url }}'
+        run: |
+          node .github/scripts/delete.js '${{ github.event.inputs.path }}'
+          node .github/scripts/add.js '${{ github.event.inputs.path }}' '${{ github.event.inputs.url }}'
       - name: Git Commit
         run: |
-          git config --global user.name 'Github Action'
-          git config --global user.email 'action@cn-traveler.github.io'
+          git config --global user.name 'Action'
+          git config --global user.email 'action@github.com'
           git add *
-          git commit -m 'add file ${{ github.event.inputs.path }}'
+          git commit -m 'update ${{ github.event.inputs.path }}'
           git push origin main

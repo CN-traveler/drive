@@ -32,7 +32,7 @@ fs.readFile('drive.json', function(err, data){
     var dir = path.split('/');
     for(var i = 0, data = json; i < dir.length; i++) {
         if(data[dir[i]] === undefined) {
-            data[dir[i]] = (i == dir.length - 1 ? url : {});
+            data[dir[i]] = (i === dir.length - 1 ? (url === '' ? {} : url) : {});
         }
         data = data[dir[i]];
     }
