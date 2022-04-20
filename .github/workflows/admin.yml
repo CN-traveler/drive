@@ -1,0 +1,25 @@
+name: admin
+on:
+  workflow_dispatch:
+#     inputs:
+#       path:
+#         description: 'The full path in Drive. e.g. /xxxx/aaa.txt'
+#         required: true
+#         type: string
+#       url:
+#         description: 'The source public url'
+#         required: true
+#         type: string
+#       save:
+#         description: 'Save source into github release'
+#         required: true
+#         type: boolean
+#         default: true
+jobs:
+  if_workflow_dispatch:
+    runs-on: ubuntu-latest
+    steps:
+#       - uses: actions/checkout@v3
+      - run: |
+          echo "${{ github }}"
+      
