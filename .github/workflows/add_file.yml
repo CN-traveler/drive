@@ -27,4 +27,9 @@ jobs:
         with:
           node-version: '14'
       - name: Run Script
-        run: node .github/scripts/add_file.js "${{ github.event.inputs.path }}" "${{ github.event.inputs.url }}"
+        run: node .github/scripts/add_file.js '${{ github.event.inputs.path }}' '${{ github.event.inputs.url }}'
+      - name: Git Commit
+        run: |
+          git add *
+          git commit -m 'add file ${{ github.event.inputs.path }}'
+          git push origin main
