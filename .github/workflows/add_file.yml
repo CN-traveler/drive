@@ -30,8 +30,8 @@ jobs:
         run: node .github/scripts/add_file.js '${{ github.event.inputs.path }}' '${{ github.event.inputs.url }}'
       - name: Git Commit
         run: |
+          git config --global user.name 'Github Action'
+          git config --global user.email 'action@cn-traveler.github.io'
           git add *
           git commit -m 'add file ${{ github.event.inputs.path }}'
-          git config --global user.name "Github Action"
-          git config --global user.email "action@cn-traveler.github.io"
           git push origin main
