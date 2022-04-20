@@ -1,5 +1,5 @@
 var path = window.location.search.substring(1);
-var drive = {}
+var drive = undefined;
 
 function findPath(path, drive) {
     var dir = path.split('/');
@@ -51,6 +51,7 @@ function loadPage() {
                     [path, drive] = findPath(path, drive);
                     loadHeader(path);
                     loadMain(drive);
+                    loadFooter(drive);
                 }
             }
         }
@@ -83,4 +84,10 @@ function loadMain(drive) {
         }
     }
     main.innerHTML = mainInnerHTML;
+}
+
+function loadFooter(drive) {
+    var footer = document.getElementById('footer');
+    var footerInnerHTML = '<a href="javascript:;" onclick="login()">登录</a>';
+    footer.innerHTML = footerInnerHTML;
 }

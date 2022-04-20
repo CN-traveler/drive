@@ -3,23 +3,21 @@
     padding: 0;
 }
 
-html {
+html, body{
+    height: 100%;
     font-size: 12px;
 }
 
 #header {
+    top: 0;
+    z-index: 0;
+    width: 100%;
     height: 2rem;
-    padding: 1rem;
+    padding: 0 1rem;
     line-height: 2rem;
     background: #eee;
-}
-
-#header .path {
-    font-size: 1.3rem;
-    outline: #000 2px solid;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    position: absolute;
+    box-sizing: border-box;
 }
 
 #header .path a {
@@ -29,27 +27,25 @@ html {
     text-decoration: none;
 }
 
-#header .path a:hover {
-    background-color: #ddd;
-}
-
 #header .path a + a::before {
     content: '/';
-    left: -0.75rem;
     position: absolute;
+    margin-left: -0.75rem;
 }
 
 #main {
-    padding: 1rem;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
-#main.list a.item {
+#main a.item {
     color: #000;
     display: block;
-    height: 2rem;
-    line-height: 2rem;
-    padding-left: 2rem;
-    font-size: 1.3rem;
     position: relative;
     text-decoration: none;
 }
@@ -59,16 +55,26 @@ html {
     outline: 1px #cdf solid;
 }
 
+#main.list a.item {
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: 2rem;
+}
+
+#main a.item::before {
+    content: '';
+    display: block;
+}
+
 #main.list a.item::before {
     left: 0;
-    content: '';
     width: 1.5rem;
-    display: block;
     height: 1.5rem;
     margin: 0.25rem;
     position: absolute;
 }
-#main::after {
+
+#main.icon::after {
     content: '';
     clear: both;
     display: block;
@@ -77,20 +83,32 @@ html {
 #main.icon a.item {
     float: left;
     width: 5rem;
-    color: #000;
-    display: block;
-    font-size: 1.7rem;
-    text-align: center;
-    position: relative;
-    text-decoration: none;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #main.icon a.item::before {
-    content: '';
     width: 5rem;
     height: 5rem;
+}
+
+#footer {
+    bottom: 0;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    z-index: 0;
+    width: 100%;
+    height: 2em;
+    line-height: 2em;
+    background: #eee;
+    position: absolute;
+}
+
+#footer a {
+    color: #000;
     display: block;
+    position: relative;
+    text-decoration: none;
 }
