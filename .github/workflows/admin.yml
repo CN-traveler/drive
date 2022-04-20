@@ -18,8 +18,13 @@ on:
 jobs:
   if_workflow_dispatch:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == "workflow_dispatch" }}
     steps:
-#       - uses: actions/checkout@v3
-      - run: |
-          echo "${{ toJSON(github) }}"
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Get Drive
+        env:
+          drive: ${{ fromJSON($(cat drive.json)) }}
+        run: |
+          echo "${{ toJSON(env.drive) }}"
       
