@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dplayer</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="./source/dplayer/DPlayer.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="dplayer"></div>
+    <script>
+        var dplayer = document.getElementById('dplayer');
+        const dp = new DPlayer({
+            container: dplayer,
+            autoplay: true,
+            theme: '#FADFA3',
+            loop: true,
+            lang: 'zh-cn',
+            screenshot: true,
+            hotkey: true,
+            preload: 'auto',
+            volume: 0.7,
+            mutex: true,
+            video: {
+                url: window.location.search.substring(1),
+                type: 'auto',
+            },
+        });
+        window.onresize = function() {
+            dplayer.style = 'width: ' + window.innerWidth + 'px; height: ' + window.innerHeight + 'px;';
+        }
+        window.onresize();
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</body>
+</html>
