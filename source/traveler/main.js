@@ -37,7 +37,7 @@ window.onload = function() {
 
 function loadPage() {
     setTimeout(() => {
-        ajaxGet('drive.json?' + new Date().getTime()).onreadystatechange = function() {
+        ajax('drive.json?' + new Date().getTime()).onreadystatechange = function() {
             if(this.readyState === 4 && this.status === 200) {
                 if(JSON.stringify(drive) != this.responseText) {
                     drive = JSON.parse(this.responseText);
