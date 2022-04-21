@@ -36,8 +36,8 @@ window.onload = function() {
 }
 
 function loadPage() {
-    // setTimeout(() => {
-        ajax('drive.json?' + new Date().getTime()).onreadystatechange = function() {
+    setTimeout(function() {
+        ajax('https://cdn.jsdelivr.net/gh/CN-traveler/drive@master/drive.json?' + new Date().getTime()).onreadystatechange = function() {
             if(this.readyState === 4 && this.status === 200) {
                 if(JSON.stringify(drive) != this.responseText) {
                     drive = JSON.parse(this.responseText);
@@ -48,8 +48,8 @@ function loadPage() {
                 }
             }
         }
-        // loadPage();
-    // }, 10000);
+        loadPage();
+    }, 1000);
 }
 
 function loadHeader(path) {
