@@ -36,7 +36,7 @@ window.onload = function() {
 }
 
 function loadPage() {
-    setTimeout(() => {
+    // setTimeout(() => {
         ajax('drive.json?' + new Date().getTime()).onreadystatechange = function() {
             if(this.readyState === 4 && this.status === 200) {
                 if(JSON.stringify(drive) != this.responseText) {
@@ -48,8 +48,8 @@ function loadPage() {
                 }
             }
         }
-        loadPage();
-    }, 1000);
+        // loadPage();
+    // }, 10000);
 }
 
 function loadHeader(path) {
@@ -81,6 +81,13 @@ function loadMain(drive) {
 
 function loadFooter(drive) {
     var footer = document.getElementById('footer');
-    var footerInnerHTML = '<a href="javascript:;" onclick="login()">登录</a>';
+    var accessToken = getAccessToken();
+    var footerInnerHTML = '';
+    if(accessToken) {
+        footerInnerHTML += '<a>' + accessToken.access_token + '</a>';
+    }
+    else {
+        footerInnerHTML += '<a href="javascript:;" onclick="getAccessToken(true)">Github 登录</a>';
+    }
     footer.innerHTML = footerInnerHTML;
 }
