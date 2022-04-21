@@ -1,7 +1,7 @@
 var config = {
     client_id: 'b6b126048b501ac43e6b',
     client_secret: '43e95fd80d06ef060166606266d128e80e7fc422',
-    redirect_uri: 'http://127.0.0.201/redirect.html',
+    redirect_uri: 'https://cn-traveler.github.io/drive/redirect.html',
 }
 
 function getAccessToken(get = false) {
